@@ -1,5 +1,23 @@
-function createMenuData(data) {
-	
+function createMenuData(data) { 
+	const result = []; //creating a vriable empty list
+  data.forEach(string_in_data => { //loop string in data
+    const parent = string_in_data.split('/'); // seperating the string and storing it in parent variable
+    if (parent.length == 2){ // if elements == 2
+      const to_sort = result.find(each_parent => {
+        return each_parent.title == parent[0]
+      })
+      if (to_sort){
+        to_sort.data.push(parent[1]);
+      }
+      else {
+        result.push({
+          title:parent[0],
+          data:[parent[1]]
+        })
+      }
+    }
+  })
+  return result
 }
 
 describe("menu Data Generator", () => {
